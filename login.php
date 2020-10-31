@@ -6,8 +6,10 @@
     <title>Login</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/css_Login.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <?php
     require_once("./src/conexion.php");
+    $query = "SELECT * FROM juegos";
     ?>
 </head>
 
@@ -22,14 +24,17 @@
       <div class="main">
          <div class="col-md-6 col-sm-12">
             <div class="login-form">
-               <form>
+               <form method="POST" action="./src/control.php" accept-charset="UTF-8">
+               <?php if (@$_GET["errorusuario"]=="si"){?>
+                <span style="color:red"><b>Datos incorrectos</b></span>
+                <?php }?>
                   <div class="form-group">
                      <label>Usuario</label>
-                     <input type="text" class="form-control" placeholder="Usuario">
+                     <input type="text" class="form-control" placeholder="Usuario" name="usuario">
                   </div>
                   <div class="form-group">
                      <label>Contraseña</label>
-                     <input type="password" class="form-control" placeholder="Contraseña">
+                     <input type="password" class="form-control" placeholder="Contraseña" name="contrasena">
                   </div>
                   <button type="submit" class="btn btn-black">Login</button>
                   <button type="submit" class="btn btn-secondary">Register</button>
