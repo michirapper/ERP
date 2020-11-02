@@ -25,6 +25,77 @@
     <?php
     require("./src/menu.inc.php");
     ?>
+    <?php
+    $query = "SELECT * FROM confempresa";
+    $queryRS = mysqli_query($conexion, $query);
+    while ($rs = mysqli_fetch_assoc($queryRS)) { ?>
+
+        <div class="container">
+
+            <div class="col-12 mt-5 d-flex ">
+                <div class="col-6 ">
+                    <img src="<?php echo $rs['Logo']; ?>" alt="" class="img-fluid">
+                </div>
+                <div class="col-6 ml-5">
+                    <h3 class="text-center"><?php echo $rs['Nombre']; ?></h3>
+                    <div class="row mt-4">
+                        <div class="col-3">
+                            <p><b>Pais: </b></p>
+                        </div>
+                        <div class="col-9">
+                            <p><?php echo $rs['Pais']; ?></p>
+                        </div>
+
+                        <div class="col-3">
+                            <p><b>Ciudad: </b></p>
+                        </div>
+                        <div class="col-9">
+                            <p><?php echo $rs['Ciudad']; ?></p>
+                        </div>
+
+                        <div class="col-3">
+                            <p><b>Direccion: </b></p>
+                        </div>
+                        <div class="col-9">
+                            <p><?php echo $rs['Direccion']; ?></p>
+                        </div>
+
+                        <div class="col-3">
+                            <p><b>NIF: </b></p>
+                        </div>
+                        <div class="col-9">
+                            <p><?php echo $rs['NIF']; ?></p>
+                        </div>
+
+                        <div class="col-3">
+                            <p><b>Telefono: </b></p>
+                        </div>
+                        <div class="col-9">
+                            <p><?php echo $rs['Telefono']; ?></p>
+                        </div>
+
+                        <?php
+                         $query = "SELECT * FROM Usuarios Where id= " .$_SESSION["user_id"];
+                         $queryRS = mysqli_query($conexion, $query);
+                         while ($rs = mysqli_fetch_assoc($queryRS)) {
+                             if ($rs['permisos_id'] == 1) {
+                                ?>
+                                <a class="btn btn-primary col-12 mt-5" href="./src/editEmpresa.php" role="button">Editar</a>
+                                <?php
+                             }
+                         }
+                        
+                        ?>
+
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+
+    <?php } ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

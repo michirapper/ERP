@@ -10,7 +10,8 @@
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <?php
     require("src/conexion.php");
-    session_start();
+    require("./src/seguridad.php");
+    
     $query = "SELECT * FROM configuracion INNER JOIN usuarios ON usuarios.configuracion_id = configuracion.id Where usuarios.id = " . $_SESSION["user_id"];
     $queryRS = mysqli_query($conexion, $query);
     while ($rs = mysqli_fetch_assoc($queryRS)) {
