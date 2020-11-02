@@ -31,42 +31,77 @@
                 <div class="col-12 mt-3">
                     <h2>Configuracion</h2>
                 </div>
-                <?php 
+                <?php
                 $query = "SELECT * FROM configuracion INNER JOIN usuarios ON usuarios.configuracion_id = configuracion.id Where usuarios.id = " . $_SESSION["user_id"];
                 $queryRS = mysqli_query($conexion, $query);
                 while ($rs = mysqli_fetch_assoc($queryRS)) { ?>
-                <div class="col-12 mt-3 d-flex">
-                    <h5 class="mr-5 col-2">Modo Oscuro</h5>
-                    <div class="border border-secondary rounded">
-                        <input type="checkbox" <?php if ($rs['apariencia'] == 2) {echo "checked";}?> data-toggle="toggle" name="checkBox">
+                    <div class="col-12 mt-3 d-flex">
+                        <h5 class="mr-5 col-2">Modo Oscuro</h5>
+                        <div class="border border-secondary rounded">
+                            <input type="checkbox" <?php if ($rs['apariencia'] == 2) {
+                                                        echo "checked";
+                                                    } ?> data-toggle="toggle" name="checkBox">
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 d-flex">
-                    <h5 class="mr-5 col-2">Idioma</h5>
-                    <div>
-                        <select class="custom-select" name="idioma">
-                            <option value="ES" <?php if ($rs['idioma'] == "ES") {echo "selected";}?>>ES</option>
-                            <option value="EN" <?php if ($rs['idioma'] == "EN") {echo "selected";}?>>EN</option>
-                        </select>
+                    <div class="col-12 d-flex">
+                        <h5 class="mr-5 col-2">Idioma</h5>
+                        <div>
+                            <select class="custom-select" name="idioma">
+                                <option value="ES" <?php if ($rs['idioma'] == "ES") {
+                                                        echo "selected";
+                                                    } ?>>ES</option>
+                                <option value="EN" <?php if ($rs['idioma'] == "EN") {
+                                                        echo "selected";
+                                                    } ?>>EN</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 d-flex">
-                    <h5 class="mr-5 col-2">Divisa</h5>
-                    <div>
-                        <select class="custom-select" name="divisa">
-                            <option value="Euro" <?php if ($rs['divisa'] == "Euro") {echo "selected";}?>>Euro</option>
-                            <option value="Dolar" <?php if ($rs['divisa'] == "Dolar") {echo "selected";}?>>Dolar</option>
-                        </select>
+                    <div class="col-12 d-flex">
+                        <h5 class="mr-5 col-2">Divisa</h5>
+                        <div>
+                            <select class="custom-select" name="divisa">
+                                <option value="Euro" <?php if ($rs['divisa'] == "Euro") {
+                                                            echo "selected";
+                                                        } ?>>Euro</option>
+                                <option value="Dolar" <?php if ($rs['divisa'] == "Dolar") {
+                                                            echo "selected";
+                                                        } ?>>Dolar</option>
+                            </select>
+                        </div>
                     </div>
+
+                    <div class="d-flex justify-content-center col-3">
+                        <input class="btn btn-primary " type="submit" value="Submit">
+                    </div>
+                <?php } ?>
+                <div class="col-12 mt-5">
+                    <h2>Nuevo Modulo</h2>
                 </div>
-                
-                <div class="d-flex justify-content-center col-3">
-                    <input class="btn btn-primary " type="submit" value="Submit">
-                </div>
-                <?php }?>
+                <?php
+                if (isset($_SESSION['message']) && $_SESSION['message']) {
+                    printf('<b>%s</b>', $_SESSION['message']);
+                    unset($_SESSION['message']);
+                }
+                ?>
+
             </div>
         </div>
     </form>
+    <div class="container">
+        <div class="row">
+            <form method="POST" action="upload.php" enctype="multipart/form-data">
+                <div class="input-group mt-2">
+                    <div class="custom-file col-12">
+                        <input type="file" class="custom-file-input" id="inputGroupFile02" name="uploadedFile">
+                        <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                        <input type="submit" name="uploadBtn" value="Upload" class="input-group-text" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
