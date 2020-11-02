@@ -27,47 +27,46 @@
     <div class="container">
         <div class="row">
             <?php
-             $query = "SELECT * FROM configuracion INNER JOIN usuarios ON usuarios.configuracion_id = configuracion.id Where usuarios.id = " . $_SESSION["user_id"];
-             $queryRS = mysqli_query($conexion, $query);
-             while ($rs = mysqli_fetch_assoc($queryRS)) {
-                 if ($rs['apariencia'] == 2) {
-                     echo "<table class='table mt-5 table-dark'>";
-                 }else{
+            $query = "SELECT * FROM configuracion INNER JOIN usuarios ON usuarios.configuracion_id = configuracion.id Where usuarios.id = " . $_SESSION["user_id"];
+            $queryRS = mysqli_query($conexion, $query);
+            while ($rs = mysqli_fetch_assoc($queryRS)) {
+                if ($rs['apariencia'] == 2) {
+                    echo "<table class='table mt-5 table-dark'>";
+                } else {
                     echo "<table class='table mt-5'>";
-                 }
-             }
+                }
+            }
             ?>
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Rango</th>
-                        <th scope="col">Permisos</th>
-                        <th scope="col">Usuarios</th>
-                        <th scope="col">Ganancias</th>
-                        <th scope="col"><input class="btn btn-primary" type="submit" value="Exportar a excel"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $query = "SELECT trabajadores.id AS id,trabajadores.nombre AS nombre, rangos.nombre as rango, permisos.nombre as permisos, usuarios, ganancias FROM trabajadores 
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Rango</th>
+                    <th scope="col">Permisos</th>
+                    <th scope="col">Usuarios</th>
+                    <th scope="col">Ganancias</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $query = "SELECT trabajadores.id AS id,trabajadores.nombre AS nombre, rangos.nombre as rango, permisos.nombre as permisos, usuarios, ganancias, usuarios_permisos_id FROM trabajadores 
                      INNER JOIN usuarios ON usuarios.id = usuarios_id
                      INNER JOIN rangos ON rangos.id = rangos_id
                      INNER JOIN permisos ON permisos.id = usuarios_permisos_id";
-                    $queryRS = mysqli_query($conexion, $query);
-                    while ($rs = mysqli_fetch_assoc($queryRS)) { ?>
-                        <tr>
-                            <th scope="row"><?php echo $rs['id']; ?></th>
-                            <td><?php echo $rs['nombre']; ?></td>
-                            <td><?php echo $rs['rango']; ?></td>
-                            <td><?php echo $rs['permisos']; ?></td>
-                            <td><?php echo $rs['usuarios']; ?></td>
-                            <td><?php echo $rs['ganancias']; ?> €</td>
-                            <td><a class="btn btn-primary" href="editUser.php?id=<?php echo $rs['id']; ?>" role="button">Editar</a></td>
-                        </tr>
-                    <?php
-                    } ?>
-                </tbody>
+                $queryRS = mysqli_query($conexion, $query);
+                while ($rs = mysqli_fetch_assoc($queryRS)) { ?>
+                    <tr>
+                        <th scope="row"><?php echo $rs['id']; ?></th>
+                        <td><?php echo $rs['nombre']; ?></td>
+                        <td><?php echo $rs['rango']; ?></td>
+                        <td><?php echo $rs['permisos']; ?></td>
+                        <td><?php echo $rs['usuarios']; ?></td>
+                        <td><?php echo $rs['ganancias']; ?> €</td>
+                        <td><a class="btn btn-primary" href="editUser.php?id=<?php echo $rs['id']; ?>" role="button">Editar</a></td>
+                    </tr>
+                <?php
+                } ?>
+            </tbody>
             </table>
 
         </div>

@@ -16,7 +16,7 @@
     $queryRS = mysqli_query($conexion, $query);
     while ($rs = mysqli_fetch_assoc($queryRS)) {
         if ($rs['apariencia'] == 2) {
-            echo "<link rel='stylesheet' href='./css/css_blackMode.css'>";
+            echo "<link rel='stylesheet' href='../css/css_blackMode.css'>";
         }
     }
     ?>
@@ -26,19 +26,20 @@
     <?php
     require("../src/menu.inc.php");
     ?>
-    <form action="../src/editarUsu.php" method="post">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 mt-3">
-                    <h2>Editar Usuario</h2>
-                </div>
-                <?php
-                $query = "SELECT trabajadores.id AS id,trabajadores.nombre AS nombre, rangos.nombre as rango, permisos.nombre as permisos, usuarios, ganancias FROM trabajadores 
+
+    <?php
+    $query = "SELECT trabajadores.id AS id,trabajadores.nombre AS nombre, rangos.nombre as rango, permisos.nombre as permisos, usuarios, ganancias, usuarios.id as userId FROM trabajadores 
                 INNER JOIN usuarios ON usuarios.id = usuarios_id
                 INNER JOIN rangos ON rangos.id = rangos_id
                 INNER JOIN permisos ON permisos.id = usuarios_permisos_id WHERE trabajadores.id = $idUser";
-                $queryRS = mysqli_query($conexion, $query);
-                while ($rs = mysqli_fetch_assoc($queryRS)) { ?>
+    $queryRS = mysqli_query($conexion, $query);
+    while ($rs = mysqli_fetch_assoc($queryRS)) { ?>
+        <form action="../src/editarUsu.php?idUser=<?php echo $rs["userId"]; ?>&idtrab=<?php echo $idUser ?>" method="post">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mt-3">
+                        <h2>Editar Usuario</h2>
+                    </div>
                     <div class="col-12 mt-3">
                         <div class="row">
                             <div class="col-1 align-self-center ">
@@ -82,13 +83,16 @@
                             </div>
 
 
+
+
                         </div>
                     </div>
-
-                <?php } ?>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+
+    <?php } ?>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
