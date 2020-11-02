@@ -75,19 +75,17 @@
                         </div>
 
                         <?php
-                         $query = "SELECT * FROM Usuarios Where id= " .$_SESSION["user_id"];
-                         $queryRS = mysqli_query($conexion, $query);
-                         while ($rs = mysqli_fetch_assoc($queryRS)) {
-                             if ($rs['permisos_id'] == 1) {
-                                ?>
-                                <a class="btn btn-primary col-12 mt-5" href="./src/editEmpresa.php" role="button">Editar</a>
-                                <?php
-                             }
-                         }
-                        
+                        $query = "SELECT * FROM Usuarios Where id= " . $_SESSION["user_id"];
+                        $queryRS = mysqli_query($conexion, $query);
+                        while ($rs = mysqli_fetch_assoc($queryRS)) {
+                            if ($rs['permisos_id'] == 1) {
                         ?>
+                                <a class="btn btn-primary col-12 mt-5" href="./editEmpresa.php" role="button">Editar</a>
+                        <?php
+                            }
+                        }
 
-                        
+                        ?>
                     </div>
                 </div>
             </div>
