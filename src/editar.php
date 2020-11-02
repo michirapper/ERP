@@ -11,7 +11,7 @@ if(isset($_POST)){
     $nif = $_POST["NIF"];
     $logo = $_POST["logo"];
 
-    $query = "UPDATE confempresa SET Nombre = '$nombre', Direccion= '$direccion', Ciudad='$ciudad', Pais='$pais', Telefono='$telefono', NIF='$nif', Logo='$logo' WHERE id = 2 ";
+    $query = "UPDATE confempresa SET Nombre = '$nombre', Direccion= '$direccion', Ciudad='$ciudad', Pais='$pais', Telefono='$telefono', NIF='$nif', Logo='$logo' WHERE id = 1 ";
     mysqli_query($conexion, $query);
 
     echo "<script>window.location='../index.php';</script>";
